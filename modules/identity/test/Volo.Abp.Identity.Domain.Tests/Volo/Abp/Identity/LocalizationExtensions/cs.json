@@ -1,7 +1,0 @@
-{
-  "culture": "cs",
-  "texts": {
-    "Volo.Abp.Identity:PasswordTooShort": "Délka hesla musí být větší než {0} znaků.",
-    "Volo.Abp.Identity:PasswordRequiresNonAlphanumeric": "Heslo musí obsahovat alespoň jeden nealfanumerický znak."
-  }
-}

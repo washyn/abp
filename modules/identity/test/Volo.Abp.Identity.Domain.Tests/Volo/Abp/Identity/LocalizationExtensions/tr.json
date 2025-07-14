@@ -1,7 +1,0 @@
-{
-  "culture": "tr",
-  "texts": {
-    "Volo.Abp.Identity:PasswordTooShort": "Şifre uzunluğu {0} karakterden uzun olmalıdır.",
-    "Volo.Abp.Identity:PasswordRequiresNonAlphanumeric": "Parola en az bir alfasayısal olmayan karakter içermelidir."
-  }
-}
