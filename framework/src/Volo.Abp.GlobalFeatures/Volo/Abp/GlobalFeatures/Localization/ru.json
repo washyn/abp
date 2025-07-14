@@ -1,6 +1,0 @@
-{
-  "culture": "ru",
-  "texts": {
-    "Volo.GlobalFeature:010001": "Службе \"{ServiceName}\" необходимо включить функцию \"{GlobalFeatureName}\"."
-  }
-}
