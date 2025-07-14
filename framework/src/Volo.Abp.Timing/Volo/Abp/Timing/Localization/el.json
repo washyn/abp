@@ -1,7 +1,0 @@
-{
-  "culture": "el",
-  "texts": {
-    "DisplayName:Abp.Timing.Timezone": "Ζώνη Ώρας",
-    "Description:Abp.Timing.Timezone": "Ζώνη Ώρας εφαρμογής"
-  }
-}

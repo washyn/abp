@@ -1,7 +1,0 @@
-{
-  "culture": "pl-PL",
-  "texts": {
-    "DisplayName:Abp.Timing.Timezone": "Strefa czasowa",
-    "Description:Abp.Timing.Timezone": "Strefa czasowa aplikacji"
-  }
-}

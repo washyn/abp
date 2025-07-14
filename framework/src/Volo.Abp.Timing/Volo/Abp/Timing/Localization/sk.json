@@ -1,7 +1,0 @@
-{
-  "culture": "sk",
-  "texts": {
-    "DisplayName:Abp.Timing.Timezone": "Časové pásmo",
-    "Description:Abp.Timing.Timezone": "Časové pásmo aplikácie"
-  }
-}

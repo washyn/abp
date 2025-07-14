@@ -1,7 +1,0 @@
-{
-  "culture": "sl",
-  "texts": {
-    "DisplayName:Abp.Timing.Timezone": "Časovni pas",
-    "Description:Abp.Timing.Timezone": "Časovni pas aplikacije"
-  }
-}
