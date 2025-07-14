@@ -1,7 +1,0 @@
-{
-  "culture": "ru",
-  "texts": {
-    "HelloText": "Привет {0}",
-    "HowAreYou": "как дела?"
-  }
-}

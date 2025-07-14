@@ -1,7 +1,0 @@
-{
-  "culture": "it",
-  "texts": {
-    "HelloText": "Salve {0}",
-    "HowAreYou": "come va?"
-  }
-}
