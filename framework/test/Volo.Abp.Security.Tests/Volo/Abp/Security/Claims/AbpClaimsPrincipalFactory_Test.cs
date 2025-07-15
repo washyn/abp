@@ -8,7 +8,7 @@ using Volo.Abp.Testing;
 using Xunit;
 
 namespace Volo.Abp.Security.Claims;
-
+// TODO:FIX TESTS
 public class AbpClaimsPrincipalFactory_Test : AbpIntegratedTest<AbpSecurityTestModule>
 {
     private readonly IAbpClaimsPrincipalFactory _abpClaimsPrincipalFactory;
@@ -22,7 +22,7 @@ public class AbpClaimsPrincipalFactory_Test : AbpIntegratedTest<AbpSecurityTestM
 
     protected override void SetAbpApplicationCreationOptions(AbpApplicationCreationOptions options)
     {
-        options.UseAutofac();
+
     }
 
     protected override void AfterAddApplication(IServiceCollection services)

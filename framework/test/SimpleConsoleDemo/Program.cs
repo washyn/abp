@@ -15,7 +15,6 @@ class Program
         using (var application = AbpApplicationFactory.Create<MyConsoleModule>(options =>
         {
             options.Configuration.CommandLineArgs = args;
-            options.UseAutofac();
         }))
         {
             Console.WriteLine("Initializing the application...");
