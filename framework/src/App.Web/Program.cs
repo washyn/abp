@@ -1,3 +1,5 @@
+using Volo.Abp.DependencyInjection;
+using Volo.Abp.Modularity;
 
 namespace App.Web;
 
@@ -20,7 +22,7 @@ public class Startup
 {
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddControllers();
+        services.AddApplication<AppModule>();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -35,5 +37,26 @@ public class Startup
         {
             endpoints.MapControllers();
         });
+    }
+}
+
+public class AppModule : AbpModule
+{
+    public override void ConfigureServices(ServiceConfigurationContext context)
+    {
+        context.Services.AddControllers();
+    }
+}
+
+public interface ISuma
+{
+    int Sum();
+}
+
+public class Suma : ISuma, ITransientDependency
+{
+    public int Sum()
+    {
+        return 444;
     }
 }

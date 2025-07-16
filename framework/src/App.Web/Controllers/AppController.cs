@@ -2,24 +2,26 @@
 
 namespace App.Web.Controllers;
 
-[Route("api/app")]
+[Route("/")]
 [ApiController]
 public class AppController : Controller
 {
     private readonly IHostEnvironment _environment;
+    private readonly ISuma _suma;
+    private readonly ILogger<AppController> _logger;
 
-    public AppController(IHostEnvironment environment)
+    public AppController(IHostEnvironment environment, ISuma suma, ILogger<AppController> logger)
     {
         _environment = environment;
+        _suma = suma;
+        _logger = logger;
     }
+
     [HttpGet()]
     public App Get()
     {
-        return  new App()
-        {
-            Version = "1.0.0",
-            Environment = _environment.EnvironmentName
-        };
+        _logger.LogInformation("Call to sum : {0}", _suma.Sum());
+        return new App() { Version = "1.0.0", Environment = _environment.EnvironmentName };
     }
 }
 
