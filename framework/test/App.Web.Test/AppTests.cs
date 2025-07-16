@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
@@ -48,7 +49,7 @@ public class DiTest : AbpAspNetCoreTestBase
     public void TestSuma()
     {
         var sum = _suma.Sum();
-        sum.ShouldBe(69);
+        sum.ShouldBe(444);
     }
 }
 
@@ -62,7 +63,25 @@ public class ProgramTest : AbpAspNetCoreTestBase
     }
 }
 
-public abstract class AbpAspNetCoreTestBase : AbpAspNetCoreTestBase<Startup>
+public class StartupTest
+{
+    public void ConfigureServices(IServiceCollection services)
+    {
+        services.AddControllers().AddApplicationPart(typeof(AppController).Assembly);
+        services.AddTransient<ISuma, Suma>();
+    }
+
+    public void Configure(IApplicationBuilder app)
+    {
+        app.UseRouting();
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapControllers();
+        });
+    }
+}
+
+public abstract class AbpAspNetCoreTestBase : AbpAspNetCoreTestBase<StartupTest>
 {
 }
 
@@ -93,10 +112,6 @@ public abstract class AbpAspNetCoreTestBase
             {
                 webBuilder.UseStartup<TStartup>();
                 webBuilder.UseTestServer();
-                webBuilder.ConfigureTestServices(services =>
-                {
-                    services.AddApplication<WebAppTestModule>();
-                });
             });
     }
 
@@ -107,24 +122,17 @@ public abstract class AbpAspNetCoreTestBase
 }
 
 // TODO: probar si se puede agregar otro startup propio aqui... y ver si funca...
-// crear 3 comits el primer mas simple de app y test, luego el segundo con los test funcando
 // y tercero con el startup adicional en el proyecto de test, en este startup de test deberia incluirse este
 // modulo WebAppTestModule
 // al igual que n el proyecto web usar el module solo para la injecccion de dependencia y probar...
-
-[DependsOn(typeof(AppModule))]
-public class WebAppTestModule : AbpModule
-{
-    public override void ConfigureServices(ServiceConfigurationContext context)
-    {
-        context.Services.Replace(ServiceDescriptor.Transient<ISuma, SumaTest>());
-    }
-}
-
-public class SumaTest : ISuma
-{
-    public int Sum()
-    {
-        return 69;
-    }
-}
+// [Dependency(ReplaceServices = true, TryRegister = true)]
+// REvisar porque el controller no se esta tomando y por ese motivo esta lanzando not found,
+// hacerlo sin abp
+// usarlo solo el startup sin abp module...
+// [DependsOn(typeof(AppModule))]
+// public class WebAppTestModule : AbpModule
+// {
+//     public override void ConfigureServices(ServiceConfigurationContext context)
+//     {
+//     }
+// }
