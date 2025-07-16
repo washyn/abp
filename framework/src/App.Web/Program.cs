@@ -1,7 +1,37 @@
+using Microsoft.AspNetCore.Mvc;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Modularity;
 
 namespace App.Web;
+
+[Route("/")]
+[ApiController]
+public class AppController : Controller
+{
+    private readonly IHostEnvironment _environment;
+    private readonly ISuma _suma;
+    private readonly ILogger<AppController> _logger;
+
+    public AppController(IHostEnvironment environment, ISuma suma, ILogger<AppController> logger)
+    {
+        _environment = environment;
+        _suma = suma;
+        _logger = logger;
+    }
+
+    [HttpGet()]
+    public App Get()
+    {
+        _logger.LogInformation("Call to sum : {0}", _suma.Sum());
+        return new App() { Version = "1.0.0", Environment = _environment.EnvironmentName };
+    }
+}
+
+public class App
+{
+    public string Version { get; set; }
+    public string Environment { get; set; }
+}
 
 public class Program
 {
@@ -22,7 +52,8 @@ public class Startup
 {
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddApplication<AppModule>();
+        services.AddControllers();
+        services.AddTransient<ISuma, Suma>();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -40,20 +71,12 @@ public class Startup
     }
 }
 
-public class AppModule : AbpModule
-{
-    public override void ConfigureServices(ServiceConfigurationContext context)
-    {
-        context.Services.AddControllers();
-    }
-}
-
 public interface ISuma
 {
     int Sum();
 }
 
-public class Suma : ISuma, ITransientDependency
+public class Suma : ISuma
 {
     public int Sum()
     {
