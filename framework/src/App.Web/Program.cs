@@ -53,7 +53,7 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddControllers();
-        services.AddTransient<ISuma, Suma>();
+        services.AddApplication<AppModule>();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -81,5 +81,12 @@ public class Suma : ISuma
     public int Sum()
     {
         return 444;
+    }
+}
+public class AppModule : AbpModule
+{
+    public override void ConfigureServices(ServiceConfigurationContext context)
+    {
+        context.Services.AddTransient<ISuma, Suma>();
     }
 }

@@ -6,7 +6,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Shouldly;
-using Volo.Abp.DependencyInjection;
 using Volo.Abp.Modularity;
 
 namespace App.Web.Test;
@@ -49,7 +48,7 @@ public class DiTest : AbpAspNetCoreTestBase
     public void TestSuma()
     {
         var sum = _suma.Sum();
-        sum.ShouldBe(444);
+        sum.ShouldBe(69);
     }
 }
 
@@ -68,7 +67,7 @@ public class StartupTest
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddControllers().AddApplicationPart(typeof(AppController).Assembly);
-        services.AddTransient<ISuma, Suma>();
+        services.AddApplication<WebAppTestModule>();
     }
 
     public void Configure(IApplicationBuilder app)
@@ -129,10 +128,19 @@ public abstract class AbpAspNetCoreTestBase
 // REvisar porque el controller no se esta tomando y por ese motivo esta lanzando not found,
 // hacerlo sin abp
 // usarlo solo el startup sin abp module...
-// [DependsOn(typeof(AppModule))]
-// public class WebAppTestModule : AbpModule
-// {
-//     public override void ConfigureServices(ServiceConfigurationContext context)
-//     {
-//     }
-// }
+[DependsOn(typeof(AppModule))]
+public class WebAppTestModule : AbpModule
+{
+    public override void ConfigureServices(ServiceConfigurationContext context)
+    {
+        context.Services.Replace(ServiceDescriptor.Transient<ISuma, SumaTest>());
+    }
+}
+
+public class SumaTest:ISuma
+{
+    public int Sum()
+    {
+        return 69;
+    }
+}
