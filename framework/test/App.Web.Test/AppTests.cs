@@ -128,6 +128,7 @@ public abstract class AbpAspNetCoreTestBase
 // REvisar porque el controller no se esta tomando y por ese motivo esta lanzando not found,
 // hacerlo sin abp
 // usarlo solo el startup sin abp module...
+// Agregar un proyecto de console para poder agregar pruebas de con modularidad...
 [DependsOn(typeof(AppModule))]
 public class WebAppTestModule : AbpModule
 {

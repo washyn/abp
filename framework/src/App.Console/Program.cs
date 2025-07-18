@@ -29,11 +29,11 @@ public class Program
             .UseEnvironment("Development")
             .ConfigureServices((hostContext, services) =>
             {
-                services.AddApplication<MyProjectNameModule>();
+                services.AddApplication<ConsoleAppModule>();
             });
 }
 
-public class MyProjectNameModule : AbpModule
+public class ConsoleAppModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
